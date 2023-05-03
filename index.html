@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        img {
+            background: #F1F1FA;
+            width: 400px;
+            height: 300px;
+            display: block;
+            margin: 10px auto;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="41.jpg?tr=w-400,h-300" />
+    <img src="41.jpg?tr=w-400,h-300" />
+    <img src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <img class="lazy" data-src="41.jpg?tr=w-400,h-300" />
+    <script>
+        function lazyload () {
+            var lazyloadImages = document.querySelectorAll("img.lazy");
+            var scrollTop = window.scrollY;
+            // console.log(scrollTop);
+            lazyloadImages.forEach(function(img) {
+                console.log(scrollTop, img.offsetTop );
+                if(img.offsetTop < (window.innerHeight + scrollTop - 00)) {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                }
+            });
+            if(lazyloadImages.length == 0) {
+                document.removeEventListener("scroll", lazyload);
+                document.removeEventListener("resize", lazyload);
+                document.removeEventListener("orientationChange", lazyload);
+            }
+        }
+        document.addEventListener("scroll", lazyload);
+        document.addEventListener("resize", lazyload);
+        document.addEventListener("orientationChange", lazyload);
+    </script>
+</body>
+</html>
